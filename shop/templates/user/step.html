@@ -1,0 +1,55 @@
+{% extends 'common/parent.html' %}
+{% load static %}
+{% block content %}
+    <body>
+    <header data-am-widget="header" class="am-header am-header-default sq-head ">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:history.back()" class="">
+                <i class="am-icon-chevron-left"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            <a href="" class="">系统设置</a>
+        </h1>
+    </header>
+    <div style="height: 49px;"></div>
+    <ul class="safty">
+        <li>
+            <a href="">
+                <img src="{% static 'images/2-icon.png' %}" width="40"/>
+                <i>接收新消息通知</i>
+                <section class="model-10">
+                    <div class="checkbox">
+                        <input type="checkbox"/>
+                        <label></label>
+                    </div>
+                </section>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="{% static 'images/2icon1.png' %}" width="40"/>
+                <i>清空缓存</i>
+                <span class="am-icon-angle-right"></span>
+                <i style="float: right; padding-right: 10px;">1.89 MB</i>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="{% static 'images/2icon2.png' %}" width="40"/>
+                <i>检查更新</i>
+                <span class="am-icon-angle-right"></span>
+                <i style="float: right; padding-right: 10px;">已经是最新版</i>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'user:关于我们' %}">
+                <img src="{% static 'images/2icon3.png' %}" width="40"/>
+                <i>关于我们</i>
+                <span class="am-icon-angle-right"></span>
+
+            </a>
+        </li>
+    </ul>
+    </body>
+{% endblock %}
