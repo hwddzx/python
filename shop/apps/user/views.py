@@ -163,6 +163,12 @@ def message(request):  # ^message/$
     return render(request, 'user/message.html')
 
 
+# 发布动态
+@check_login
+def release(request):  # ^release/$
+    return render(request, 'user/release.html')
+
+
 # 系统设置
 @check_login
 def step(request):  # ^step/$

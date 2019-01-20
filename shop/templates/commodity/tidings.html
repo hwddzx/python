@@ -1,45 +1,72 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>超市</title>
-        <meta name="description" content="">
-        <meta name="keywords" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="Cache-Control" content="no-siteapp" />
-        <link rel="icon" type="image/png" href="/theme/default/images/favicon.png">
-		<link href="css/amazeui.min.css" rel="stylesheet" type="text/css" />
-		<link href="css/style.css" rel="stylesheet" type="text/css" />
-	</head>
-	<body style="background: #efefef;">
-		<header data-am-widget="header" class="am-header am-header-default sq-head ">
-			<div class="am-header-left am-header-nav">
-				<a href="javascript:history.back()" class="">
-					<i class="am-icon-chevron-left"></i>
-				</a>
-			</div>
-			<h1 class="am-header-title">
-  	            <a href="" class="">消息中心</a>
-            </h1>
-	    </header>
-	    <div style="height: 49px;"></div>
-	    <ul class="mess">
-	    	<li>
-	    		<a href="">
-	    		<h2>商城活动，快来参与</h2>
-	    		<p class="con">年底感恩活动震撼来袭啦！为回馈和感恩大家，一元抢购活动震撼开场！我们准备了丰富多样的商品，一元就能抢购，赶紧把喜欢的商品带回家吧！</p>
-	    	    <div class="time"><span>16-01-06</span><i>查看详情 ></i></div>
-	    		</a>
-	    	</li>
-	    	<li>
-	    		<a href="">
-	    		<h2>商城活动，快来参与</h2>
-	    		<p class="con">年底感恩活动震撼来袭啦！为回馈和感恩大家，一元抢购活动震撼开场！我们准备了丰富多样的商品，一元就能抢购，赶紧把喜欢的商品带回家吧！</p>
-	    	    <div class="time"><span>16-01-06</span><i>查看详情 ></i></div>
-	    		</a>
-	    	</li>
-	    </ul>
-	</body>
-</html>
+{% extends 'common/parent.html' %}
+{% load static %}
+{% block content %}
+    <body style="background: #efefef;">
+    <header data-am-widget="header" class="am-header am-header-default sq-head ">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:history.back()" class="">
+                <i class="am-icon-chevron-left"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            <a href="" class="">消息中心</a>
+        </h1>
+    </header>
+    <div style="height: 49px;"></div>
+    <ul class="mess">
+        <li>
+            <a href="">
+                <h2>商城活动，快来参与</h2>
+                <p class="con">年底感恩活动震撼来袭啦！为回馈和感恩大家，一元抢购活动震撼开场！我们准备了丰富多样的商品，一元就能抢购，赶紧把喜欢的商品带回家吧！</p>
+                <div class="time"><span>16-01-06</span><i>查看详情 ></i></div>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <h2>商城活动，快来参与</h2>
+                <p class="con">年底感恩活动震撼来袭啦！为回馈和感恩大家，一元抢购活动震撼开场！我们准备了丰富多样的商品，一元就能抢购，赶紧把喜欢的商品带回家吧！</p>
+                <div class="time"><span>16-01-06</span><i>查看详情 ></i></div>
+            </a>
+        </li>
+    </ul>
+    </body>
+{% endblock %}
+{% block base %}
+    <!--底部-->
+    <div style="height: 55px;"></div>
+    <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default sq-foot am-no-layout" id="">
+        <ul class="am-navbar-nav am-cf am-avg-sm-5">
+            <li>
+                <a href="{% url 'commodity:首页' %}" class="curr">
+                    <span class="am-icon-home"></span>
+                    <span class="am-navbar-label">首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'user:我的动态' %}" class="">
+                    <span class="am-icon-comments"></span>
+                    <span class="am-navbar-label">动态</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'shopping_cart:购物车' %}" class="">
+                    <span class="am-icon-shopping-cart"></span>
+                    <span class="am-navbar-label">购物车</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'order:全部订单' %}" class="">
+                    <span class="am-icon-file-text"></span>
+                    <span class="am-navbar-label">订单</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'user:个人中心' %}" class="">
+                    <span class="am-icon-user"></span>
+                    <span class="am-navbar-label">我的</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

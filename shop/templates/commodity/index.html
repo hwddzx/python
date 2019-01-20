@@ -1,10 +1,13 @@
 {% extends 'common/parent.html' %}
 {% load static %}
+{% block title %}
+    首页
+{% endblock %}
 {% block content %}
     <body>
     <header data-am-widget="header" class="am-header am-header-default sq-head1">
         <div class="am-header-left am-header-nav">
-            <a href="city.html" class="" style="color: #fff;">
+            <a href="{% url 'commodity:选择城市' %}" class="" style="color: #fff;">
                 <img src="{% static 'images/city.png' %}"/>
                 <p style="font-size: 12px; margin-top: -35px;">南昌</p>
             </a>
@@ -16,7 +19,7 @@
             </div>
         </h1>
         <div class="am-header-right am-header-nav">
-            <a href="tidings.html" class="">
+            <a href="{% url 'commodity:消息中心' %}" class="">
                 <div class="messgae"><span>10</span></div>
             </a>
         </div>
@@ -33,7 +36,7 @@
     <ul class="sq-nav">
         <li>
             <div class="am-gallery-item">
-                <a href="recharge.html" class="">
+                <a href="{% url 'commodity:充值' %}" class="">
                     <img src="{% static 'images/icon.png' %}"/>
                     <p>充值</p>
                 </a>
@@ -49,7 +52,7 @@
         </li>
         <li>
             <div class="am-gallery-item">
-                <a href="yhq.html" class="">
+                <a href="{% url 'user:优惠券' %}" class="">
                     <img src="{% static 'images/icon2.png' %}"/>
                     <p>红包</p>
                 </a>
@@ -67,7 +70,7 @@
     <ul class="sq-nav1">
         <li>
             <div class="am-gallery-item">
-                <a href="speed.html" class="">
+                <a href="{% url 'commodity:零食飞速' %}" class="">
                     <img src="{% static 'images/icon4.png' %}"/>
                     <p>零食飞速</p>
                 </a>
@@ -75,7 +78,7 @@
         </li>
         <li>
             <div class="am-gallery-item">
-                <a href="category.html" class="">
+                <a href="{% url 'commodity:超市' %}" class="">
                     <img src="{% static 'images/icon5.png' %}"/>
                     <p>超市</p>
                 </a>
@@ -187,7 +190,7 @@
             <div class="popup-close"><i class="iconfont">&#xe602</i></div>
         </div>
         <div class="dq-text">
-            <img src="images/qiandao.png" width="40"/>&nbsp; 您已连续签到3天
+            <img src="{% static 'images/qiandao.png' %}" width="40"/>&nbsp; 您已连续签到3天
         </div>
     </div>
     <!--签到-->

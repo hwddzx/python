@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import RegexValidator
 
 from user import set_password
 from user.models import User
@@ -10,9 +11,10 @@ class UsersForm(forms.Form):
                                 min_length=11,
                                 error_messages={
                                     "required": "手机号不能为空",
-                                    "max_length": "手机号只能设置11个字符",
-                                    "min_length": "手机号只能设置11个字符"
-                                })
+                                },
+                                validators=[
+                                    RegexValidator(r'^1[3-9]\d{9}$', '手机号码格式错误!')
+                                ])
     password = forms.CharField(max_length=16,
                                min_length=6,
                                error_messages={
@@ -44,8 +46,6 @@ class UsersForm(forms.Form):
         if password != repassword:
             raise forms.ValidationError({"repassword": "两次输入的密码不一致"})
         return self.cleaned_data
-
-
 
 
 # 登陆form

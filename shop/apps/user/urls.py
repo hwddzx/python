@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from user.views import member, step, about, forgetpassword, records, integral, integralexchange, \
     integralrecords, yhq, ygq, collect, collect_edit, infor, gladdress, saftystep, money, job, recommend, myrecommend, \
-    message, LoginView, RegView
+    message, LoginView, RegView, release
 
 urlpatterns = [
     url(r'^$', member, name='个人中心'),
@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^recommend/$', recommend, name='推荐有奖'),
     url(r'^myrecommend/$', myrecommend, name='我的推荐'),
     url(r'^message/$', message, name='我的动态'),
+    url(r'^release/$', release, name='发布动态'),
 ]
