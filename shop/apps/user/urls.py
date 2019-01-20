@@ -1,13 +1,13 @@
 from django.conf.urls import url
 
-from user.views import member, step, about, login, reg, forgetpassword, records, integral, integralexchange, \
+from user.views import member, step, about, forgetpassword, records, integral, integralexchange, \
     integralrecords, yhq, ygq, collect, collect_edit, infor, gladdress, saftystep, money, job, recommend, myrecommend, \
-    message
+    message, LoginView, RegView
 
 urlpatterns = [
     url(r'^$', member, name='个人中心'),
-    url(r'^login/$', login, name='登录'),
-    url(r'^reg/$', reg, name='注册'),
+    url(r'^login/$', LoginView.as_view(), name='登录'),
+    url(r'^reg/$', RegView.as_view(), name='注册'),
     url(r'^step/$', step, name='系统设置'),
     url(r'^about/$', about, name='关于我们'),
     url(r'^forgetpassword/$', forgetpassword, name='忘记密码'),
