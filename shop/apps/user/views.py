@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
 from django.views import View
 
 from user import set_password
-from user.forms import UsersForm, LoginForm
+from user.forms import UsersForm, LoginForm, InforForm, PasswordForm
 from user.helps import check_login
 from user.models import User
 
@@ -116,9 +117,46 @@ def collect_edit(request):  # ^collect_edit/$
 
 
 # 个人资料
-@check_login
-def infor(request):  # ^infor/$
-    return render(request, 'user/infor.html')
+class InforView(View):
+    @method_decorator(check_login)
+    def get(self, request):
+        # 回显个人资料
+        # 根据session中保存的ID查询数据库
+        telephone = request.session.get('ID')
+        data = User.objects.get(telephone=telephone)
+        context = {
+            "data": data
+        }
+        return render(request, 'user/infor.html', context=context)
+
+    @method_decorator(check_login)
+    def post(self, request):
+        # 接收参数
+        data = request.POST
+        form = InforForm(data)
+        # 判断合法性
+        if form.is_valid():
+            # 合法
+            phone = request.session.get('ID')
+            username = data['username']
+            gender = data['gender']
+            birthday = data['birthday']
+            school = data['school']
+            hometown = data['hometown']
+            location = data['location']
+            telephone = data['telephone']
+            # 修改数据库
+            User.objects.filter(telephone=phone).update(username=username, birthday=birthday, school=school,
+                                                        hometown=hometown, location=location, gender=gender,
+                                                        telephone=telephone)
+            # 重新创建session
+            request.session['ID'] = telephone
+            return redirect('user:个人中心')
+        else:
+            # 不合法
+            # 返回错误提示
+            errors = form.errors
+            return render(request, 'user/infor.html', context=errors)
 
 
 # 收货地址
@@ -131,6 +169,28 @@ def gladdress(request):  # ^gladdress/$
 @check_login
 def saftystep(request):  # ^saftystep/$
     return render(request, 'user/saftystep.html')
+
+
+# 修改密码
+class PasswordView(View):
+    @method_decorator(check_login)
+    def get(self, request):
+        return render(request, 'user/password.html')
+
+    @method_decorator(check_login)
+    def post(self, request):
+        # 接收参数
+        # telephone = request.session.get('ID')
+        data = request.POST
+        form = PasswordForm(data)
+        if form.is_valid():
+            # 合法
+            password = set_password(data['password'])
+            User.objects.filter(telephone=data['telephone']).update(password=password)
+            return redirect('user:个人中心')
+        else:
+            errors = form.errors
+            return render(request, 'user/password.html', context=errors)
 
 
 # 我的钱包

@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
 from user.views import member, step, about, forgetpassword, records, integral, integralexchange, \
-    integralrecords, yhq, ygq, collect, collect_edit, infor, gladdress, saftystep, money, job, recommend, myrecommend, \
-    message, LoginView, RegView, release
+    integralrecords, yhq, ygq, collect, collect_edit, gladdress, saftystep, money, job, recommend, myrecommend, \
+    message, LoginView, RegView, release, InforView, PasswordView
 
 urlpatterns = [
     url(r'^$', member, name='个人中心'),
@@ -19,7 +19,7 @@ urlpatterns = [
     url(r'^ygq/$', ygq, name='已过期'),
     url(r'^collect/$', collect, name='我的收藏'),
     url(r'^collect_edit/$', collect_edit, name='编辑收藏'),
-    url(r'^infor/$', infor, name='个人资料'),
+    url(r'^infor/$', InforView.as_view(), name='个人资料'),
     url(r'^gladdress/$', gladdress, name='收货地址'),
     url(r'^saftystep/$', saftystep, name='安全设置'),
     url(r'^money/$', money, name='我的钱包'),
@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^myrecommend/$', myrecommend, name='我的推荐'),
     url(r'^message/$', message, name='我的动态'),
     url(r'^release/$', release, name='发布动态'),
+    url(r'^password/$', PasswordView.as_view(), name='修改密码'),
 ]

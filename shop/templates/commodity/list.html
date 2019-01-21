@@ -40,7 +40,7 @@
         <li>
             <a href="detail.html"><img src=" {% static 'images/test10.png' %}" class="list-pic1"/></a>
             <div class="shop-list-mid" style="width: 65%;">
-                <div class="tit"><a href="detail.html">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
+                <div class="tit"><a href="{% url 'commodity:商品详情' %}">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
                 <div class="am-gallery-desc">￥52</div>
                 <p>销量：5件</p>
             </div>
@@ -56,8 +56,8 @@
     </ul>
     <div class="fix-bot">
         <div class="fix-bot-cart"><i>8</i></div>
-        <a href="tureorder.html" class="list-js">去结算</a>
-        <a href="tureorder.html" class="list-jsk">一键快购</a>
+        <a href="{% url 'order:确认订单' %}" class="list-js">去结算</a>
+        <a href="{% url 'order:确认订单' %}" class="list-jsk">一键快购</a>
     </div>
     <!--店铺弹出框-->
     <div class="shop">

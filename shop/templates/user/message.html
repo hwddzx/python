@@ -55,14 +55,6 @@
             <div class="popup-close">取消</div>
         </div>
     </div>
-    <script type='text/javascript'>
-        (function () {
-            new PopUp_api({el: '.zf', html: '.share'});
-        })()
-    </script>
-    </body>
-{% endblock %}
-{% block base %}
     <!--底部-->
     <div style="height: 55px;"></div>
     <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default sq-foot am-no-layout" id="">
@@ -100,4 +92,11 @@
             </li>
         </ul>
     </div>
+
+    <script type='text/javascript'>
+        (function () {
+            new PopUp_api({el: '.zf', html: '.share'});
+        })()
+    </script>
+    </body>
 {% endblock %}

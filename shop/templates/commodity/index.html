@@ -193,17 +193,7 @@
             <img src="{% static 'images/qiandao.png' %}" width="40"/>&nbsp; 您已连续签到3天
         </div>
     </div>
-    <!--签到-->
 
-    <script type='text/javascript'>
-        (function () {
-            new PopUp_api({el: '.index-qd', html: '.qd-box'});
-        })()
-    </script>
-
-    </body>
-{% endblock %}
-{% block base %}
     <!--底部-->
     <div style="height: 55px;"></div>
     <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default sq-foot am-no-layout" id="">
@@ -241,7 +231,17 @@
             </li>
         </ul>
     </div>
+
+
+    <script type='text/javascript'>
+        (function () {
+            new PopUp_api({el: '.index-qd', html: '.qd-box'});
+        })()
+    </script>
+
+    </body>
 {% endblock %}
+
 {% block footer %}
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/amazeui.min.js' %}"></script>
