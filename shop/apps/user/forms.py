@@ -98,18 +98,25 @@ class InforForm(forms.Form):
                                     RegexValidator(r'^1[3-9]\d{9}$', '手机号码格式错误!')
                                 ])
 
-    def clean_telephone(self):  # 验证手机号是否存在
-        telephone = self.cleaned_data.get('telephone')
-        flag = User.objects.filter(telephone=telephone).exists()
-        if flag:
-            # 已存在
-            raise forms.ValidationError("该手机号已存在")
-        else:
-            return telephone
+    # def clean_telephone(self):  # 验证手机号是否存在
+    #     telephone = self.cleaned_data.get('telephone')
+    #     flag = User.objects.filter(telephone=telephone).exists()
+    #     if flag:
+    #         # 已存在
+    #         raise forms.ValidationError("该手机号已存在")
+    #     else:
+    #         return telephone
 
 
 # 修改密码form
 class PasswordForm(forms.Form):
+    telephone = forms.CharField(max_length=11,
+                                min_length=11,
+                                error_messages={
+                                    "required": "手机号不能为空",
+                                    "max_length": "手机号长度是11位",
+                                    "min_length": "手机号长度是11位"
+                                })
     password = forms.CharField(max_length=16,
                                min_length=6,
                                error_messages={
@@ -132,25 +139,20 @@ class PasswordForm(forms.Form):
                                     "min_length": "密码至少需要6个字符"
                                 })
 
-    # 判断原密码是否正确
-    # 判断用户名和密码
     def clean(self):
-        # 获取用户输入的手机号
+        # 判断旧密码是否正确
+        # 获取手机号和旧密码
         telephone = self.cleaned_data.get('telephone')
+        password = self.cleaned_data.get('password', "")
         # 查询数据库
         user = User.objects.get(telephone=telephone)
         # 验证密码
-        password = self.cleaned_data.get('password', '')
         if user.password != set_password(password):
             raise forms.ValidationError({'password': '密码错误'})
-        # 返回所有清洗后的数据
-        self.cleaned_data['user'] = user
-        return self.cleaned_data
-
-    def clean(self):
-        # 获取两次输入的密码
+        # 判断两次输入的新密码是否一致
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
         if password1 != password2:
             raise forms.ValidationError({"password2": "两次输入的密码不一致"})
+        # 返回所有清洗后的数据
         return self.cleaned_data

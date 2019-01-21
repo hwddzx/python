@@ -180,13 +180,14 @@ class PasswordView(View):
     @method_decorator(check_login)
     def post(self, request):
         # 接收参数
-        # telephone = request.session.get('ID')
         data = request.POST
         form = PasswordForm(data)
         if form.is_valid():
             # 合法
-            password = set_password(data['password'])
-            User.objects.filter(telephone=data['telephone']).update(password=password)
+            # 将密码加密
+            new_password = set_password(form.cleaned_data.get('password1'))
+            # 修改数据库中密码
+            User.objects.filter(telephone=form.cleaned_data.get('telephone')).update(password=new_password)
             return redirect('user:个人中心')
         else:
             errors = form.errors
@@ -235,7 +236,38 @@ def step(request):  # ^step/$
     return render(request, 'user/step.html')
 
 
+# 绑定手机
+@check_login
+def boundphone(request):  # ^boundphone/$
+    return render(request, 'user/boundphone.html')
+
+
 # 关于我们
 @check_login
 def about(request):  # ^about/$
     return render(request, 'user/about.html')
+
+
+# 设置支付密码
+@check_login
+def payment(request):  # ^payment/$
+    return render(request, 'user/payment.html')
+
+
+# 申请兼职
+@check_login
+def applicationjob(request):  # ^applicationjob/$
+    return render(request, 'user/applicationjob.html')
+
+
+# 申请记录
+@check_login
+def application(request):  # ^application/$
+    return render(request, 'user/application.html')
+
+
+# 安全退出
+@check_login
+def sign_out(request):
+    request.session.flush()
+    return redirect('user:登录')

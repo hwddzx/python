@@ -2,7 +2,8 @@ from django.conf.urls import url
 
 from user.views import member, step, about, forgetpassword, records, integral, integralexchange, \
     integralrecords, yhq, ygq, collect, collect_edit, gladdress, saftystep, money, job, recommend, myrecommend, \
-    message, LoginView, RegView, release, InforView, PasswordView
+    message, LoginView, RegView, release, InforView, PasswordView, boundphone, payment, applicationjob, application, \
+    sign_out
 
 urlpatterns = [
     url(r'^$', member, name='个人中心'),
@@ -29,4 +30,9 @@ urlpatterns = [
     url(r'^message/$', message, name='我的动态'),
     url(r'^release/$', release, name='发布动态'),
     url(r'^password/$', PasswordView.as_view(), name='修改密码'),
+    url(r'^boundphone/$', boundphone, name='绑定手机'),
+    url(r'^payment/$', payment, name='设置支付密码'),
+    url(r'^applicationjob/$', applicationjob, name='申请兼职'),
+    url(r'^application/$', application, name='申请记录'),
+    url(r'^sign_out/$', sign_out, name='安全退出'),
 ]
