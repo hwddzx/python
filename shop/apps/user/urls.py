@@ -3,7 +3,7 @@ from django.conf.urls import url
 from user.views import member, step, about, forgetpassword, records, integral, integralexchange, \
     integralrecords, yhq, ygq, collect, collect_edit, gladdress, saftystep, money, job, recommend, myrecommend, \
     message, LoginView, RegView, release, InforView, PasswordView, boundphone, payment, applicationjob, application, \
-    sign_out
+    sign_out, SendMsg
 
 urlpatterns = [
     url(r'^$', member, name='个人中心'),
@@ -35,4 +35,5 @@ urlpatterns = [
     url(r'^applicationjob/$', applicationjob, name='申请兼职'),
     url(r'^application/$', application, name='申请记录'),
     url(r'^sign_out/$', sign_out, name='安全退出'),
+    url(r'^SendMsg/$', SendMsg.as_view(), name='发送短信验证码'),
 ]

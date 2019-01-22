@@ -1,5 +1,6 @@
 from django import forms
 from django.core.validators import RegexValidator
+from django_redis import get_redis_connection
 
 from user import set_password
 from user.models import User
@@ -29,6 +30,14 @@ class UsersForm(forms.Form):
                                      "max_length": "密码最多设置16个字符",
                                      "min_length": "密码至少需要6个字符"
                                  })
+    # 验证码
+    captcha = forms.CharField(max_length=6,
+                              error_messages={
+                                  "required": "验证码不能为空"
+                              })
+
+    # 用户协议
+    agree = forms.BooleanField(error_messages={'required': '必须同意用户协议'})
 
     def clean_telephone(self):  # 验证手机号是否存在
         telephone = self.cleaned_data.get('telephone')
@@ -45,6 +54,19 @@ class UsersForm(forms.Form):
         repassword = self.cleaned_data.get('repassword')
         if password != repassword:
             raise forms.ValidationError({"repassword": "两次输入的密码不一致"})
+        # 验证用户传入验证码和redis中的是否一样
+        # 获取用户传入的验证码
+        try:
+            captcha = self.cleaned_data.get('captcha')
+            telephone = self.cleaned_data.get('telephone', '')
+            # 获取redis中的
+            r = get_redis_connection()
+            random_code = r.get(telephone)  # 二进制,转码
+            random_code = random_code.decode('utf-8')
+            if captcha and captcha != random_code:
+                raise forms.ValidationError({"captcha": "验证码输入错误"})
+        except:
+            raise forms.ValidationError({"captcha": "验证码输入错误"})
         return self.cleaned_data
 
 

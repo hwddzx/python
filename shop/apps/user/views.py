@@ -1,10 +1,16 @@
+import random
+import uuid
+
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views import View
+import re
+from django_redis import get_redis_connection
 
 from user import set_password
 from user.forms import UsersForm, LoginForm, InforForm, PasswordForm
-from user.helps import check_login
+from user.helps import check_login, send_sms
 from user.models import User
 
 
@@ -63,9 +69,63 @@ class RegView(View):
 
 
 # 忘记密码
-@check_login
 def forgetpassword(request):  # ^forgetpassword/$
     return render(request, 'user/forgetpassword.html')
+
+
+# 发送短信验证码
+class SendMsg(View):
+    def get(self, requset):
+        pass
+
+    def post(self, requset):
+        # 1接收参数
+        telephone = requset.POST.get("telephone", '')
+        rs = re.search('^1[3-9]\d{9}$', telephone)
+        # 判断参数合法性
+        if rs is None:
+            return JsonResponse({'error': 1, 'errmsg': '电话号码格式错误'})
+        # 2处理数据
+        # 模拟,最后接入运营商
+        """
+            1.生成随机验证码
+            2.保存验证码 保存到Redis中,存取速度快,方便设置有效时间
+            3.接入运营商
+       """
+        # 生成随机验证码字符串
+        random_code = "".join([str(random.randint(0, 9)) for _ in range(6)])
+        print("==========={}=============".format(random_code))
+        # 保存验证码到redis
+        # 获取连接
+        r = get_redis_connection()
+        # 保存手机号码对应的验证码
+        r.set(telephone, random_code)
+        r.expire(telephone, 60)  # 设置60s后过期
+        # 首先获取当前手机号码的发送次数
+        key_times = "{}_times".format(telephone)
+        now_times = r.get(key_times)  # 从redis获取的是二进制,需要转换
+        # now_times = now_times.decode('utf-8')
+        # now_times = int(now_times)
+        if now_times is None or int(now_times) < 100:
+            # 保存手机发送验证码的次数,不能超过5次
+            r.incr(key_times)
+            # 设置过期时间
+            r.expire(key_times, 3600)
+        else:
+            # 返回,告诉用户发送次数过多
+            return JsonResponse({'error': 1, "errmsg": "发送次数过多"})
+
+        # 接入运营商
+        # >>>3. 接入运营商
+        __business_id = uuid.uuid1()
+        params = "{\"code\":\"%s\",\"product\":\"嘟狗宠物店\"}" % random_code
+        # params = "{\"code\":\"我爱你\",\"product\":\"嘟狗宠物店\"}"
+        # print(params)
+        rs = send_sms(__business_id, telephone, "注册验证", "SMS_2245271", params)
+        print(rs.decode('utf-8'))
+
+        # 3合成响应
+        return JsonResponse({'error': 0})
 
 
 # 账户余额
