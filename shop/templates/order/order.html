@@ -12,16 +12,21 @@
             </a>
         </div>
         <h1 class="am-header-title">
-            <a href="" class="">确认订单</a>
+            <a href="" class="">提交订单</a>
         </h1>
     </header>
     <div style="height: 49px;"></div>
-    <div class="add-address">
-        <a href="address.html">+新建收货地址</a>
+    <h5 class="order-tit">收货人信息</h5>
+    <div class="order-name">
+        <a href="gladdress.html">
+            <p class="order-tele">宋科&nbsp;&nbsp;&nbsp;15180163170</p>
+            <p class="order-add">江西省南昌市 青云谱区解放西路258号</p>
+        </a>
         <i class="am-icon-angle-right"></i>
     </div>
     <div style="background: #eee; height: 10px;"></div>
-    <ul class="shopcart-list" style="padding-bottom: 0;">
+    <h5 class="order-tit">确认订单信息</h5>
+    <ul class="shopcart-list" style="padding-bottom: 0; margin-top: 0;">
         <li>
             <img src="{% static 'images/test3.png' %}" class="shop-pic"/>
             <div class="order-mid">
@@ -47,12 +52,16 @@
             <i>包邮</i>
         </li>
         <li class="order-infor-first">
-            <a href="">积分抵费></a>
+            <a href="integral.html">积分抵费></a>
         </li>
         <li class="order-infor-first">
-            <a href="">选择优惠券></a>
+            <a href="{% url 'user:优惠券' %}">选择优惠券></a>
         </li>
     </ul>
+    <!--<div style="background: #eee; height: 10px;"></div>
+
+    <input id="beginTime" class="select-time" placeholder="请选择配送时间 >" /></div>
+    <div id="datePlugin"></div>-->
     <div style="background: #eee; height: 10px;"></div>
     <textarea placeholder="备注说明" class="bz-infor"></textarea>
     <div style="background: #eee; height: 10px;"></div>
@@ -61,9 +70,9 @@
         <div class="order-text">
             应付总额：<span>￥188</span>
         </div>
-        <a href="{% url 'order:提交订单' %}" class="js-btn">提交订单</a>
+        <a href="{% url 'order:完成支付' %}" class="js-btn">提交订单</a>
     </div>
-    <!--底部-->
+        <!--底部-->
     <div style="height: 55px;"></div>
     <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default sq-foot am-no-layout" id="">
         <ul class="am-navbar-nav am-cf am-avg-sm-5">
@@ -101,7 +110,5 @@
         </ul>
     </div>
 
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/amazeui.min.js' %}"></script>
     </body>
 {% endblock %}

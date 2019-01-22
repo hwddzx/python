@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from commodity.views import detail, index, tidings, recharge, speed, list_detail, city, category
+from commodity.views import detail, index, tidings, recharge, speed, list_detail, city, category, village
 
 urlpatterns = [
     url(r'^detail/$', detail, name='商品详情'),
@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^list_detail/$', list_detail, name='店铺详情'),
     url(r'^city/$', city, name='选择城市'),
     url(r'^category/$', category, name='超市'),
+    url(r'^village/$', village, name='校区选择'),
 ]

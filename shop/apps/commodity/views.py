@@ -49,3 +49,9 @@ def city(request):
 @check_login
 def category(request):
     return render(request, 'commodity/category.html')
+
+
+# 校区选择
+@check_login
+def village(request):
+    return render(request, 'commodity/village.html')

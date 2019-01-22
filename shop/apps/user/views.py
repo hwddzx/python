@@ -248,7 +248,9 @@ class PasswordView(View):
             new_password = set_password(form.cleaned_data.get('password1'))
             # 修改数据库中密码
             User.objects.filter(telephone=form.cleaned_data.get('telephone')).update(password=new_password)
-            return redirect('user:个人中心')
+            # 密码修改成功,清楚session并返回登录界面
+            request.session.flush()
+            return redirect('user:登录')
         else:
             errors = form.errors
             return render(request, 'user/password.html', context=errors)

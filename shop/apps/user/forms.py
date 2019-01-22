@@ -171,6 +171,7 @@ class PasswordForm(forms.Form):
         # 验证密码
         if user.password != set_password(password):
             raise forms.ValidationError({'password': '密码错误'})
+
         # 判断两次输入的新密码是否一致
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')

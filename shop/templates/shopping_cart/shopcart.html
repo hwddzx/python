@@ -17,7 +17,7 @@
     <div class="login-logo">
         <img src="{% static 'images/care.png' %}">
         <p>亲、您的购物车还是空空的哦，快去装满它!</p>
-        <a href="index.html" class="goshopping">前去逛逛</a>
+        <a href="{% url 'commodity:首页' %}" class="goshopping">前去逛逛</a>
     </div>
     <ul class="shopcart-list">
         <li>
@@ -83,7 +83,7 @@
             <input type="checkbox" checked="checked" value="" data-am-ucheck checked>
         </label>
         <a class="del">全选</a>
-        <a href="tureorder.html" class="js-btn">去结算</a>
+        <a href="{% url 'order:确认订单' %}" class="js-btn">去结算</a>
         <div class="js-text">
             <P>合计：<b>￥217.80</b></P>
             <p class="js-car">免费配送</p>
