@@ -12,17 +12,18 @@
             个人资料
         </h1>
     </header>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div style="height: 49px;"></div>
         <ul class="safty1">
             <li>
-                <a href="">
-                    <i style="margin-top: 25px;">头像</i>
-                    <div class="infor-pic">
-                        <img src="{% static 'images/infortx.png' %}"/>
-                    </div>
-                </a>
+                <i style="margin-top: 25px;">头像</i>
+                <div class="infor-pic">
+                    <img src="{{ MEDIA_URL }}{{ data.head }}"/>
+                </div>
+            </li>
+            <li>
+                <input type="file" name="head">
             </li>
             <li>
                 <i>昵称</i>

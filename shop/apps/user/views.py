@@ -34,7 +34,10 @@ class LoginView(View):
         if form.is_valid():
             # 合法
             # 创建session
-            request.session['ID'] = form.cleaned_data.get('telephone')
+            user = form.cleaned_data['user']
+            request.session['ID'] = user.pk
+            request.session['telephone'] = user.telephone
+            request.session['head'] = user.head
             # 账号密码正确,跳转到首页
             return redirect('commodity:首页')
         else:
@@ -182,8 +185,8 @@ class InforView(View):
     def get(self, request):
         # 回显个人资料
         # 根据session中保存的ID查询数据库
-        telephone = request.session.get('ID')
-        data = User.objects.get(telephone=telephone)
+        user_id = request.session.get('ID')
+        data = User.objects.get(id=user_id)
         context = {
             "data": data
         }
@@ -197,7 +200,14 @@ class InforView(View):
         # 判断合法性
         if form.is_valid():
             # 合法
-            phone = request.session.get('ID')
+            # 获取ID
+            user_id = request.session.get('ID')
+            # head必须通过save来保存
+            head = request.FILES.get('head')
+            user = User.objects.get(pk=user_id)
+            if head is not None:
+                user.head = head
+                user.save()
             username = data['username']
             gender = data['gender']
             birthday = data['birthday']
@@ -205,12 +215,15 @@ class InforView(View):
             hometown = data['hometown']
             location = data['location']
             telephone = data['telephone']
-            # 修改数据库
-            User.objects.filter(telephone=phone).update(username=username, birthday=birthday, school=school,
-                                                        hometown=hometown, location=location, gender=gender,
-                                                        telephone=telephone)
+            #
+            # # 修改数据库
+            User.objects.filter(pk=user_id).update(username=username, birthday=birthday, school=school,
+                                                   hometown=hometown, location=location, gender=gender,
+                                                   telephone=telephone)
             # 重新创建session
-            request.session['ID'] = telephone
+            request.session['ID'] = user_id
+            request.session['telephone'] = telephone
+            request.session['head'] = user.head
             return redirect('user:个人中心')
         else:
             # 不合法

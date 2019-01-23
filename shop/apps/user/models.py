@@ -21,6 +21,7 @@ class User(models.Model):
     school = models.CharField(null=True, default="", max_length=50, verbose_name='学校')
     location = models.CharField(null=True, default="", max_length=100, verbose_name='地址')
     hometown = models.CharField(null=True, default="", max_length=100, verbose_name='故乡')
+    head = models.ImageField(upload_to='head/%Y%m/%d', default='head/contactqq.png', verbose_name='头像')
 
     class Meta:
         # 设置表名
