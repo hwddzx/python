@@ -3,7 +3,7 @@ from django.conf.urls import url
 from commodity.views import detail, index, tidings, recharge, speed, list_detail, city, category, village
 
 urlpatterns = [
-    url(r'^detail/$', detail, name='商品详情'),
+    url(r'^detail/(\d+)/$', detail, name='商品详情'),
     url(r'^index/$', index, name='首页'),
     url(r'^tidings/$', tidings, name='消息中心'),
     url(r'^recharge/$', recharge, name='充值'),
