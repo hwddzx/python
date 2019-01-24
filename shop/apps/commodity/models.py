@@ -6,6 +6,7 @@ from django.db import models
 class CommodityClassModel(models.Model):
     classname = models.CharField(verbose_name='分类名', max_length=20)
     classintro = models.TextField(verbose_name='分类简介')
+    order = models.SmallIntegerField(default=0, verbose_name='排序')
     addtime = models.DateTimeField(verbose_name='添加时间', auto_now_add=True)
     updatetime = models.DateTimeField(verbose_name='修改时间', auto_now=True)
     is_delete = models.BooleanField(verbose_name='是否删除', default=False)

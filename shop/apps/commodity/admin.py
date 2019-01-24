@@ -9,7 +9,7 @@ from commodity.models import CommodityClassModel, CommodityUnitModel, CommodityS
 class CommodityClassModelAdmin(admin.ModelAdmin):
     list_per_page = 10
     # 指定显示的列
-    list_display = ['classname', 'classintro', 'addtime', 'updatetime', 'is_delete']
+    list_display = ['classname', 'classintro', 'order', 'addtime', 'updatetime', 'is_delete']
 
 
 @admin.register(CommodityUnitModel)
