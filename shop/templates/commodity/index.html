@@ -29,7 +29,7 @@
     <div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
         <ul class="am-slides">
             {% for banner in banners %}
-                <li><img src="{{ MEDIA_URL }}{{ banner.img_url }}"/></li>
+                <li><a href="{% url 'commodity:商品详情' banner.Commodity_sku.id %}"><img src="{{ MEDIA_URL }}{{ banner.img_url }}"/></a></li>
             {% endfor %}
         </ul>
     </div>
@@ -79,7 +79,7 @@
         </li>
         <li>
             <div class="am-gallery-item">
-                <a href="{% url 'commodity:超市' %}" class="">
+                <a href="{% url 'commodity:超市' '' '' %}" class="">
                     <img src="{% static 'images/icon5.png' %}"/>
                     <p>超市</p>
                 </a>
@@ -118,7 +118,7 @@
                         <a href="{% url 'commodity:商品详情' foo.id %}" class="">
                             <img src="{{ MEDIA_URL }}{{ foo.logo }}"/>
                             <h3 class="am-gallery-title">{{ foo.name }}</h3>
-                            <div class="am-gallery-desc">￥52</div>
+                            <div class="am-gallery-desc">{{ foo.price }}</div>
                         </a>
                     </div>
                 </li>

@@ -3,11 +3,20 @@
 {% block title %}
     商品列表
 {% endblock %}
+{% block head %}
+    <style>
+        .list-price {
+            background: url({% if order == 2 %}{% static 'images/order-bot.png' %}{% elif order == 3 %}{% static 'images/order-top.png' %}{% else %}{% static 'images/order.png' %}{% endif %}) no-repeat right center;
+            padding-right: 20px;
+            font-style: normal;
+        }
+    </style>
+{% endblock %}
 {% block content %}
     <body>
     <header data-am-widget="header" class="am-header am-header-default sq-head ">
         <div class="am-header-left am-header-nav">
-            <a href="javascript:history.back()" class="">
+            <a href="{% url 'commodity:首页' %}" class="">
                 <i class="am-icon-chevron-left"></i>
             </a>
         </div>
@@ -18,15 +27,22 @@
     </header>
     <div style="height: 49px;"></div>
     <ul class="list-nav">
-        <li class="current"><a href="">综合</a></li>
-        <li><a href="">销量</a></li>
-        <li><a href=""><i class="list-price">价格</i></a></li>
-        <li><a href="">新品</a></li>
+        <li{% if order == 0 %} class="current" {% endif %}><a href="{% url 'commodity:超市' cate_id 0 %}">综合</a></li>
+        <li{% if order == 1 %} class="current" {% endif %}><a href="{% url 'commodity:超市' cate_id 1 %}">销量</a></li>
+        <li{% if order == 2 or order == 3 %} class="current" {% endif %}>
+            <a id="price" href="{% url 'commodity:超市' cate_id 2 %}">
+                <i class="list-price">价格</i>
+            </a>
+        </li>
+        <li{% if order == 4 %} class="current" {% endif %}><a href="{% url 'commodity:超市' cate_id 4 %}">新品</a></li>
     </ul>
     <div class="content-list">
         <div class="list-left">
             {% for class in classes %}
-                <li class="current"><a href="">{{ class.classname }}</a></li>
+                <li  {% if cate_id == class.id %}
+                    class="current"
+                {% endif %}>
+                    <a href="{% url 'commodity:超市' class.pk order %}">{{ class.classname }}</a></li>
             {% endfor %}
         </div>
         <div class="list-right">
@@ -100,8 +116,16 @@
         })
 
     </script>
+    <script>
+        $(function () {
+            //修改标签上的地址值
+            {% if order == 2 %}
+                $('#price').attr('href', '{% url 'commodity:超市' cate_id 3 %}')
+            {% elif order == 3%}
+                $('#price').attr('href', '{% url 'commodity:超市' cate_id 2 %}')
+            {% endif %}
+        })
+    </script>
     </body>
 {% endblock %}
-{% block base %}
 
-{% endblock %}
