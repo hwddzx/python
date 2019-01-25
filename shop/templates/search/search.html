@@ -19,6 +19,7 @@
             </div>
         </form>
     </header>
+
     {% if query %}
         <ul class="list-pro">
             {% for result  in page %}
@@ -38,12 +39,6 @@
             {% endfor %}
         </ul>
     {% endif %}
-
-
-
-
-
-
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/amazeui.min.js' %}"></script>

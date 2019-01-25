@@ -2,7 +2,6 @@
 from haystack import indexes
 from commodity.models import CommoditySkuModel
 
-
 class CommoditySkuModelSearchIndex(indexes.SearchIndex, indexes.Indexable):
     # 设置需要检索的主要字段内容 use_template表示字段内容在模板中
     text = indexes.CharField(document=True, use_template=True)

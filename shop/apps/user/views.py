@@ -38,8 +38,15 @@ class LoginView(View):
             request.session['ID'] = user.pk
             request.session['telephone'] = user.telephone
             request.session['head'] = user.head
-            # 账号密码正确,跳转到首页
-            return redirect('commodity:首页')
+
+            referer = request.session.get('referer')
+            if referer:
+                # 跳转回去 并 删除session
+                del request.session['referer']
+                return redirect(referer)
+            else:
+                # 账号密码正确,跳转到首页
+                return redirect('user:个人中心')
         else:
             # 不合法,返回错误提示
             errors = form.errors

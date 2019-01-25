@@ -1,10 +1,11 @@
 from django.shortcuts import render
 
 from commodity.models import CommodityClassModel, CommoditySpuModel, CommoditySkuModel, BannerModel, ActivityZoneModel
+from shopping_cart.helper import get_cart_count
 from user.helps import check_login
 
 
-@check_login  # 商品详情
+# 商品详情
 def detail(request, id):
     # 获取商品sku的信息
     sku = CommoditySkuModel.objects.get(pk=id)
@@ -14,7 +15,7 @@ def detail(request, id):
     return render(request, 'commodity/detail.html', context=context)
 
 
-@check_login  # 首页
+# 首页
 def index(request):
     banner = BannerModel.objects.all()
     activity = ActivityZoneModel.objects.all()
@@ -40,17 +41,17 @@ def speed(request):
     return render(request, 'commodity/speed.html')
 
 
-@check_login  # 店铺详情
+# 店铺详情
 def list_detail(request):
     return render(request, 'commodity/list.html')
 
 
-@check_login  # 选择城市
+# 选择城市
 def city(request):
     return render(request, 'commodity/city.html')
 
 
-@check_login  # 超市
+# 商品列表页
 def category(request, cate_id, order):
     # 查询所有分类
     classes = CommodityClassModel.objects.filter(is_delete=False).order_by('order')
@@ -85,11 +86,15 @@ def category(request, cate_id, order):
     #     skus = skus.order_by('-price')
     # elif order == 4:
     #     skus = skus.order_by('-addtime')
+
+    # 获取当前用户购物车商品的总数量
+    cart_count = get_cart_count(request)
     context = {
         'classes': classes,
         'skus': skus,
         'cate_id': cate_id,
-        'order': order
+        'order': order,
+        'cart_count': cart_count,
     }
     return render(request, 'commodity/category.html', context=context)
 

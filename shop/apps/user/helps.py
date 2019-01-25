@@ -1,8 +1,10 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from aliyunsdkdysmsapi.request.v20170525 import SendSmsRequest
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.profile import region_provider
 from shop.settings import ACCESS_KEY_ID, ACCESS_KEY_SECRET
+from shopping_cart.helper import json_msg
 
 
 # 将验证登录的方法写成装饰器
@@ -10,8 +12,16 @@ def check_login(func):
     def verify_login(request, *args, **kwargs):
         # 判断是否登录
         if request.session.get('ID') is None:
-            # 跳转到登录
-            return redirect('user:登录')
+            # 将上一个请求的地址保存到session
+            referer = request.META.get('HTTP_REFERER', None)
+            if referer:
+                request.session['referer'] = referer
+            # 判断是否为ajax请求
+            if request.is_ajax():
+                return JsonResponse(json_msg(1, '未登录'))
+            else:
+                # 跳转到登录
+                return redirect('user:登录')
         else:
             # 调用原函数
             return func(request, *args, **kwargs)
