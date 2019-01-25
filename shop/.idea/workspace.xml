@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ad6bc86-6d46-420a-a1b6-b8e6688f6763" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/shopping_cart/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/commodity/search_indexes.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/commodity/search_indexes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/commodity/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/commodity/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/shopping_cart/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/shopping_cart/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/shopping_cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/shopping_cart/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/user/helps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/helps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/commodity/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/commodity/category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/commodity/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/commodity/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/search/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../项目日志.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../项目日志.docx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,15 +52,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apps/user/views.py">
+      <file leaf-file-name="category.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/commodity/category.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="46" column="17" lean-forward="true" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
-              <folding>
-                <element signature="e#1277#1972#0" />
-                <element signature="e#2124#3817#0" />
-              </folding>
+            <state relative-caret-position="285">
+              <caret line="156" column="34" lean-forward="true" selection-start-line="156" selection-start-column="34" selection-end-line="156" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -147,9 +133,9 @@
         <option value="$PROJECT_DIR$/apps/shopping_cart/urls.py" />
         <option value="$PROJECT_DIR$/apps/user/helps.py" />
         <option value="$PROJECT_DIR$/apps/shopping_cart/views.py" />
-        <option value="$PROJECT_DIR$/templates/commodity/category.html" />
         <option value="$PROJECT_DIR$/apps/commodity/views.py" />
         <option value="$PROJECT_DIR$/apps/user/views.py" />
+        <option value="$PROJECT_DIR$/templates/commodity/category.html" />
       </list>
     </option>
   </component>
@@ -185,13 +171,13 @@
             <path>
               <item name="shop" type="b2602c69:ProjectViewProjectNode" />
               <item name="shop" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shop" type="b2602c69:ProjectViewProjectNode" />
               <item name="shop" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="commodity" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -311,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548229098677</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="完成购物车添加功能,完成登陆后跳转到最后一个界面功能">
+      <created>1548414654221</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1548414654221</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -324,7 +317,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="760" y="0" width="1171" height="1048" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3293348" />
@@ -335,7 +328,7 @@
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.32893288" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.21483096" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32715377" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17911792" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.17911792" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.2523148" />
       <window_info anchor="right" id="SciView" order="4" weight="0.3294753" />
@@ -390,7 +383,8 @@
     <MESSAGE value="完成验证码功能" />
     <MESSAGE value="完成头像上传功能" />
     <MESSAGE value="完成商品模型设计" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成商品模型设计" />
+    <MESSAGE value="完成购物车添加功能,完成登陆后跳转到最后一个界面功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成购物车添加功能,完成登陆后跳转到最后一个界面功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -727,13 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/commodity/category.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="112" column="37" lean-forward="true" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/shopping_cart/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -772,6 +759,13 @@
             <element signature="e#1277#1972#0" />
             <element signature="e#2124#3817#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/commodity/category.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="156" column="34" lean-forward="true" selection-start-line="156" selection-start-column="34" selection-end-line="156" selection-end-column="34" />
         </state>
       </provider>
     </entry>
