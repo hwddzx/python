@@ -14,8 +14,7 @@
         </div>
         <h1 class="am-header-title1">
             <div class="search-box">
-                <a href="{% url 'commodity:校区选择' %}" class="index-search">四川师范大学成都学院∨</a>
-                <!--  <input type="submit" value="" class="search-icon" /> -->
+                <a href="{% url 'search:haystack_search' %}" class="index-search">iPhone XS Max</a>
             </div>
         </h1>
         <div class="am-header-right am-header-nav">
@@ -29,7 +28,8 @@
     <div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
         <ul class="am-slides">
             {% for banner in banners %}
-                <li><a href="{% url 'commodity:商品详情' banner.Commodity_sku.id %}"><img src="{{ MEDIA_URL }}{{ banner.img_url }}"/></a></li>
+                <li><a href="{% url 'commodity:商品详情' banner.Commodity_sku.id %}"><img
+                        src="{{ MEDIA_URL }}{{ banner.img_url }}"/></a></li>
             {% endfor %}
         </ul>
     </div>
