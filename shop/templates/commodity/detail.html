@@ -59,8 +59,8 @@
         <h4>数量：{{ sku.num }}</h4>
         <div class="d-stock">
             <a class="decrease">-</a>
-            <input id="num" readonly="" class="text_box" name="" type="text" value="1">
-            <input id="id" type="hidden" value="644">
+            <input id="num" sku_id="{{ sku.pk }}" readonly="" class="text_box" name="" type="text" value="1">
+            <input id="id" type="hidden" value="1">
             <a class="increase">+</a>
             <span id="dprice" class="price" style="display:none"> 36</span>
         </div>
@@ -77,21 +77,6 @@
                 {{ sku.spu_id.detail | safe }}
             </div>
             <div class="am-tab-panel am-fade detail " id="tab2">
-                <!--<div class="comment">
-                    <span>好评：</span>
-                    <div class="com-good"></div>
-                    <span>100%</span>
-                </div>
-                <div class="comment">
-                    <span>中评：</span>
-                    <div class="com-bad"></div>
-                    <span>0%</span>
-                </div>
-                <div class="comment">
-                    <span>差评：</span>
-                    <div class="com-bad"></div>
-                    <span>0%</span>
-                </div>-->
                 <ul class="comment-list">
                     <li class="current"><a href="">全部</a></li>
                     <li><a href="">好评（20）</a></li>
@@ -99,16 +84,6 @@
                     <li><a href="">差评（0）</a></li>
                 </ul>
                 <ul class="comment-pic">
-                    <li>
-                        <div class="tit">
-                            <img src="{% static 'images/tx.png' %}" class="tx"/>
-                            <span>songke2014</span>
-                            <i> [2016-01-01]</i>
-                        </div>
-                        <div class="comment-con">
-                            买了些给家人，都说不错！
-                        </div>
-                    </li>
                     <li>
                         <div class="tit">
                             <img src="{% static 'images/tx.png' %}" class="tx"/>
@@ -128,7 +103,7 @@
     <!--底部-->
     <div style=" height: 55px;"></div>
     <ul class="fix-shopping">
-        <li><a href="{% url 'shopping_cart:购物车' %}" class="join">加入购物车</a></li>
+        <li><a id="add_cart" class="join">加入购物车</a></li>
         <li><a href="{% url 'order:确认订单' %}" class="imm-buy">立即购买</a></li>
     </ul>
 
@@ -140,7 +115,6 @@
                 var current_num = parseInt(self.siblings('input').val());
                 current_num += 1;
                 self.siblings('input').val(current_num);
-                update_item(self.siblings('input').data('item-id'));
             })
             $('.decrease').click(function () {
                 var self = $(this);
@@ -148,8 +122,32 @@
                 if (current_num > 1) {
                     current_num -= 1;
                     self.siblings('input').val(current_num);
-                    update_item(self.siblings('input').data('item-id'));
                 }
+            })
+            //点击加入购物车.添加当前商品到购物车
+            $('#add_cart').click(function () {
+                //var self = $(this);
+                //准备数据
+                //sku_id 在input上添加一个自定义属性
+                //找到input获取自定义的属性值
+                var sku_id = $('#num').attr('sku_id');
+                //获取用户购买数量
+                var count = $('#id').val()
+                var data = {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'count': count,
+                    'sku_id': sku_id
+                }
+                //完成ajax请求
+                $.ajax({
+                    type: 'post',
+                    url: '{% url "shopping_cart:添加购物车" %}',
+                    data: data,
+                    dataType: 'json',
+                    success: function (data) {
+                        alert(data.errmsg);
+                    }
+                })
             })
         })
     </script>

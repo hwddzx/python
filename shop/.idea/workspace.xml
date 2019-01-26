@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ad6bc86-6d46-420a-a1b6-b8e6688f6763" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/commodity/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/commodity/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/shopping_cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/shopping_cart/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/commodity/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/commodity/detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../项目日志.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../项目日志.docx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,17 +53,41 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="category.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/commodity/category.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="156" column="34" lean-forward="true" selection-start-line="156" selection-start-column="34" selection-end-line="156" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.48347548">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="category.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/templates/commodity/category.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-4">
+                  <caret line="154" column="41" selection-start-line="154" selection-start-column="41" selection-end-line="154" selection-end-column="41" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="detail.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/templates/commodity/detail.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="486">
+                  <caret line="149" column="18" lean-forward="true" selection-start-line="149" selection-start-column="18" selection-end-line="149" selection-end-column="18" />
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                    <element signature="n#div#5;n#body#0;n#!!top" />
+                    <element signature="n#div#0;n#div#5;n#body#0;n#!!top" />
+                    <element signature="n#div#1;n#div#0;n#div#5;n#body#0;n#!!top" />
+                    <element signature="n#li#0;n#ul#1;n#div#1;n#div#0;n#div#5;n#body#0;n#!!top" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -128,14 +154,14 @@
         <option value="$PROJECT_DIR$/shop/settings.py" />
         <option value="$PROJECT_DIR$/apps/commodity/search_indexes.py" />
         <option value="$PROJECT_DIR$/utils/whoosh_cn_backend.py" />
-        <option value="$PROJECT_DIR$/templates/commodity/detail.html" />
         <option value="$PROJECT_DIR$/apps/shopping_cart/helper.py" />
         <option value="$PROJECT_DIR$/apps/shopping_cart/urls.py" />
         <option value="$PROJECT_DIR$/apps/user/helps.py" />
-        <option value="$PROJECT_DIR$/apps/shopping_cart/views.py" />
         <option value="$PROJECT_DIR$/apps/commodity/views.py" />
         <option value="$PROJECT_DIR$/apps/user/views.py" />
         <option value="$PROJECT_DIR$/templates/commodity/category.html" />
+        <option value="$PROJECT_DIR$/apps/shopping_cart/views.py" />
+        <option value="$PROJECT_DIR$/templates/commodity/detail.html" />
       </list>
     </option>
   </component>
@@ -161,6 +187,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -171,19 +198,18 @@
             <path>
               <item name="shop" type="b2602c69:ProjectViewProjectNode" />
               <item name="shop" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shop" type="b2602c69:ProjectViewProjectNode" />
               <item name="shop" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="commodity" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="shopping_cart" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -304,7 +330,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548414654221</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="完成商品列表购物车减少功能">
+      <created>1548415974568</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1548415974568</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -318,56 +351,55 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3293348" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50159913" side_tool="true" weight="0.2780807" />
-      <window_info anchor="bottom" id="manage.py@shop" order="14" weight="0.4477448" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293348" />
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.32893288" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.21483096" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.16139586" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32715377" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.17911792" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18443497" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.2523148" />
       <window_info anchor="right" id="SciView" order="4" weight="0.3294753" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.5478548" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39476553" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="manage.py@shop" order="14" weight="0.4477448" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Database Console" order="11" weight="0.32497275" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Database Console" order="11" weight="0.32497275" />
+      <window_info anchor="bottom" id="Message" order="0" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.08955224" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293348" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="4" weight="0.3294753" />
+      <window_info anchor="bottom" id="manage.py@shop" order="14" weight="0.4477448" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.2618262" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.08955224" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3293348" />
-      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.2618262" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="13" weight="0.32893288" />
-      <window_info anchor="bottom" id="manage.py@shop" order="14" weight="0.4477448" />
       <window_info anchor="right" id="Database" order="3" weight="0.2523148" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32715377" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50159913" side_tool="true" weight="0.2780807" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.54852784" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293348" />
+      <window_info anchor="right" id="SciView" order="4" weight="0.3294753" />
       <window_info anchor="bottom" id="Database Console" order="11" weight="0.32497275" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.54852784" />
+      <window_info anchor="bottom" id="Python Console" order="13" weight="0.32893288" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,14 +416,15 @@
     <MESSAGE value="完成头像上传功能" />
     <MESSAGE value="完成商品模型设计" />
     <MESSAGE value="完成购物车添加功能,完成登陆后跳转到最后一个界面功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成购物车添加功能,完成登陆后跳转到最后一个界面功能" />
+    <MESSAGE value="完成商品列表购物车减少功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成商品列表购物车减少功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="62" />
+      <option name="time" value="70" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -522,9 +555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -563,9 +593,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="12" column="14" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-          <folding>
-            <element signature="n#style#0;n#div#7;n#body#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -600,9 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="7" lean-forward="true" selection-end-line="16" />
-          <folding>
-            <element signature="e#14#42#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -641,9 +665,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
           <caret line="166" column="44" lean-forward="true" selection-start-line="166" selection-start-column="44" selection-end-line="166" selection-end-column="44" />
-          <folding>
-            <element signature="e#19#101#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -651,19 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
           <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/commodity/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -704,13 +712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/virtual/site1/Lib/site-packages/django/utils/decorators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/commodity/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="451">
@@ -718,24 +719,6 @@
           <folding>
             <element signature="e#0#59#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/shopping_cart/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="36" column="17" lean-forward="true" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#218#234#2" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/shopping_cart/helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="4" column="7" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -762,10 +745,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://E:/virtual/site1/Lib/site-packages/django/utils/decorators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/shopping_cart/helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/shopping_cart/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="55" column="49" selection-start-line="55" selection-start-column="45" selection-end-line="55" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/commodity/category.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="156" column="34" lean-forward="true" selection-start-line="156" selection-start-column="34" selection-end-line="156" selection-end-column="34" />
+        <state relative-caret-position="-4">
+          <caret line="154" column="41" selection-start-line="154" selection-start-column="41" selection-end-line="154" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/commodity/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="149" column="18" lean-forward="true" selection-start-line="149" selection-start-column="18" selection-end-line="149" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#div#5;n#body#0;n#!!top" />
+            <element signature="n#div#0;n#div#5;n#body#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#5;n#body#0;n#!!top" />
+            <element signature="n#li#0;n#ul#1;n#div#1;n#div#0;n#div#5;n#body#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>

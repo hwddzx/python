@@ -37,6 +37,7 @@ class AddCartView(View):
         # 1. 接受参数
         user_id = request.session.get('ID')
         sku_id = request.POST.get('sku_id')
+        # print(sku_id)
         count = request.POST.get('count')
         # 2. 判断参数合法性
         # a. 判断为整数
