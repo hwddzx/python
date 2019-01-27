@@ -11,8 +11,23 @@ from user.helps import check_login
 
 # 购物车
 @check_login
-def shopcart(request):  # ^shopcart/$
-    return render(request, 'shopping_cart/shopcart.html')
+def shopcart(request):
+    # 接收用户ID
+    user_id = request.session.get('ID')
+    # 连接redis
+    r = get_redis_connection()
+    # 准备键
+    cart_key = f"cart_{user_id}"
+    # 查找出来得到一个数据全为二进制的字典
+    data = r.hgetall(cart_key)
+    # 创建一个空列表保存model对象
+    skus = []
+    for key in data:
+        skus.append(CommoditySkuModel.objects.get(pk=int(key)))
+    context = {
+        'skus': skus
+    }
+    return render(request, 'shopping_cart/shopcart.html', context=context)
 
 
 # 操作购物车,添加购物车数据
