@@ -11,7 +11,7 @@ from django_redis import get_redis_connection
 from user import set_password
 from user.forms import UsersForm, LoginForm, InforForm, PasswordForm
 from user.helps import check_login, send_sms
-from user.models import User
+from user.models import User, UserAddress
 
 
 # 个人中心
@@ -242,7 +242,14 @@ class InforView(View):
 # 收货地址
 @check_login
 def gladdress(request):  # ^gladdress/$
-    return render(request, 'user/gladdress.html')
+    # 获取session中用户ID
+    user_id = request.session.get('ID')
+    # 根据用户id查询收货地址表
+    address = UserAddress.objects.filter(user=user_id)
+    context = {
+        "address": address
+    }
+    return render(request, 'user/gladdress.html', context=context)
 
 
 # 安全设置
@@ -353,3 +360,9 @@ def application(request):  # ^application/$
 def sign_out(request):
     request.session.flush()
     return redirect('user:登录')
+
+
+# 添加收货地址
+@check_login
+def address(request):
+    return render(request, 'user/address.html')

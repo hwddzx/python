@@ -23,7 +23,9 @@ def shopcart(request):
     # 创建一个空列表保存model对象
     skus = []
     for key in data:
-        skus.append(CommoditySkuModel.objects.get(pk=int(key)))
+        sku = CommoditySkuModel.objects.get(pk=int(key))
+        sku.count = data[key]
+        skus.append(sku)
     context = {
         'skus': skus
     }
