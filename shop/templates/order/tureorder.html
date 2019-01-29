@@ -17,25 +17,20 @@
     </header>
     <div style="height: 49px;"></div>
     <div class="add-address">
-        <a href="address.html">+新建收货地址</a>
+        <a href="{% url 'user:添加收货地址' %}">+新建收货地址</a>
         <i class="am-icon-angle-right"></i>
     </div>
     <div style="background: #eee; height: 10px;"></div>
     <ul class="shopcart-list" style="padding-bottom: 0;">
-        <li>
-            <img src="{% static 'images/test3.png' %}" class="shop-pic"/>
-            <div class="order-mid">
-                <div class="tit">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</div>
-                <div class="order-price">￥169 <i>X2</i></div>
-            </div>
-        </li>
-        <li>
-            <img src="{% static 'images/test3.png' %}" class="shop-pic"/>
-            <div class="order-mid">
-                <div class="tit">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</div>
-                <div class="order-price">￥169 <i>X2</i></div>
-            </div>
-        </li>
+        {% for sku in skus %}
+            <li>
+                <img src="{{ MEDIA_URL }}{{ sku.logo }}" class="shop-pic"/>
+                <div class="order-mid">
+                    <div class="tit">{{ sku.name }}</div>
+                    <div class="order-price">{{ sku.price }}<i>{{ sku.count }}</i></div>
+                </div>
+            </li>
+        {% endfor %}
     </ul>
     <ul class="order-infor">
         <li class="order-infor-first">

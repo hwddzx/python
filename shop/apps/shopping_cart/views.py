@@ -5,6 +5,7 @@ from django.views import View
 from django_redis import get_redis_connection
 
 from commodity.models import CommoditySkuModel
+from order.helper import get_user_sku
 from shopping_cart.helper import json_msg, get_cart_count
 from user.helps import check_login
 
@@ -12,20 +13,7 @@ from user.helps import check_login
 # 购物车
 @check_login
 def shopcart(request):
-    # 接收用户ID
-    user_id = request.session.get('ID')
-    # 连接redis
-    r = get_redis_connection()
-    # 准备键
-    cart_key = f"cart_{user_id}"
-    # 查找出来得到一个数据全为二进制的字典
-    data = r.hgetall(cart_key)
-    # 创建一个空列表保存model对象
-    skus = []
-    for key in data:
-        sku = CommoditySkuModel.objects.get(pk=int(key))
-        sku.count = data[key]
-        skus.append(sku)
+    skus = get_user_sku(request)
     context = {
         'skus': skus
     }
@@ -85,7 +73,10 @@ class AddCartView(View):
         if goods_sku.num < old_count + count:
             return JsonResponse(json_msg(3, '库存不足!'))
         # 将商品添加到购物车
-        r.hincrby(cart_key, sku_id, count)
+        rs_count = r.hincrby(cart_key, sku_id, count)
+        if rs_count <= 0:
+            # 删除field
+            r.hdel(cart_key, sku_id)
         # 获取购物车中的总数量
         cart_count = get_cart_count(request)
         # 3.合成响应

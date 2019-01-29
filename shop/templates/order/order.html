@@ -18,29 +18,24 @@
     <div style="height: 49px;"></div>
     <h5 class="order-tit">收货人信息</h5>
     <div class="order-name">
-        <a href="gladdress.html">
-            <p class="order-tele">宋科&nbsp;&nbsp;&nbsp;15180163170</p>
-            <p class="order-add">江西省南昌市 青云谱区解放西路258号</p>
+        <a href="{% url 'user:收货地址' %}">
+            <p class="order-tele">{{ address.username }}&nbsp;&nbsp;&nbsp;{{ address.phone }}</p>
+            <p class="order-add">{{ address.province }}{{ address.city }}{{ address.area }}{{ address.brief }}</p>
         </a>
         <i class="am-icon-angle-right"></i>
     </div>
     <div style="background: #eee; height: 10px;"></div>
     <h5 class="order-tit">确认订单信息</h5>
     <ul class="shopcart-list" style="padding-bottom: 0; margin-top: 0;">
-        <li>
-            <img src="{% static 'images/test3.png' %}" class="shop-pic"/>
-            <div class="order-mid">
-                <div class="tit">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</div>
-                <div class="order-price">￥169 <i>X2</i></div>
-            </div>
-        </li>
-        <li>
-            <img src="{% static 'images/test3.png' %}" class="shop-pic"/>
-            <div class="order-mid">
-                <div class="tit">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</div>
-                <div class="order-price">￥169 <i>X2</i></div>
-            </div>
-        </li>
+        {% for sku in skus %}
+            <li>
+                <img src="{{ MEDIA_URL }}{{ sku.logo }}" class="shop-pic"/>
+                <div class="order-mid">
+                    <div class="tit">{{ sku.name }}</div>
+                    <div class="order-price">￥{{ sku.price }} <i>X{{ sku.count }}</i></div>
+                </div>
+            </li>
+        {% endfor %}
     </ul>
     <ul class="order-infor">
         <li class="order-infor-first">
@@ -52,7 +47,7 @@
             <i>包邮</i>
         </li>
         <li class="order-infor-first">
-            <a href="integral.html">积分抵费></a>
+            <a href="{% url 'user:积分' %}">积分抵费></a>
         </li>
         <li class="order-infor-first">
             <a href="{% url 'user:优惠券' %}">选择优惠券></a>
@@ -72,7 +67,7 @@
         </div>
         <a href="{% url 'order:完成支付' %}" class="js-btn">提交订单</a>
     </div>
-        <!--底部-->
+    <!--底部-->
     <div style="height: 55px;"></div>
     <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default sq-foot am-no-layout" id="">
         <ul class="am-navbar-nav am-cf am-avg-sm-5">
@@ -109,6 +104,5 @@
             </li>
         </ul>
     </div>
-
     </body>
 {% endblock %}

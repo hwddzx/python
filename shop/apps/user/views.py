@@ -363,6 +363,10 @@ def sign_out(request):
 
 
 # 添加收货地址
-@check_login
-def address(request):
-    return render(request, 'user/address.html')
+class AddressView(View):
+    @method_decorator(check_login)
+    def get(self, request):
+        return render(request, 'user/address.html')
+
+    def post(self, request):
+        pass
