@@ -3,7 +3,7 @@ from django.core.validators import RegexValidator
 from django_redis import get_redis_connection
 
 from user import set_password
-from user.models import User
+from user.models import User, UserAddress
 
 
 # 注册form
@@ -179,3 +179,38 @@ class PasswordForm(forms.Form):
             raise forms.ValidationError({"password2": "两次输入的密码不一致"})
         # 返回所有清洗后的数据
         return self.cleaned_data
+
+
+# 收货地址form
+class AddressForm(forms.Form):
+    hcity = forms.CharField(error_messages={"required": "地区选择不能为空"})
+    hproper = forms.CharField(error_messages={"required": "地区选择不能为空"})
+    harea = forms.CharField(error_messages={"required": "地区选择不能为空"})
+    brief = forms.CharField(max_length=100,
+                            error_messages={
+                                "required": "详细地址不能为空",
+                                "max_length": "地址长度过长"
+                            })
+    username = forms.CharField(max_length=100,
+                               error_messages={
+                                   "required": "收货人不能为空",
+                                   "max_length": "长度过长"
+                               })
+    phone = forms.CharField(max_length=11,
+                            min_length=11,
+                            error_messages={
+                                "required": "电话号码不能为空",
+                                "max_length": "电话号码格式错误",
+                                "min_length": "电话号码格式错误"
+                            },
+                            validators=[
+                                RegexValidator(r'^1[3-9]\d{9}$', '电话号码格式错误')
+                            ])
+    is_default = forms.BooleanField(required=False)
+
+    # def clean(self):
+    #     cleaned_data = self.cleaned_data
+    #     count = UserAddress.objects.filter(user_id=self.data.get('user_id')).count()
+    #     if count >= 6:
+    #         raise forms.ValidationError({'hcity': '收货地址最多保存6条'})
+    #     return cleaned_data

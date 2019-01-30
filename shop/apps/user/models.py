@@ -42,7 +42,7 @@ class UserAddress(models.Model):
     city = models.CharField(verbose_name='市', max_length=20)
     area = models.CharField(verbose_name='区', max_length=20)
     brief = models.CharField(verbose_name='详情地址', max_length=255)
-    is_default = models.BooleanField(verbose_name="是否设置为默认", default=False, blank=True)
+    is_default = models.BooleanField(verbose_name="是否设置为默认", default=False)
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='添加时间')
     update_time = models.DateTimeField(auto_now=True, verbose_name='更新时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')

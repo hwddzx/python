@@ -41,6 +41,8 @@ class CommoditySkuModelAdmin(admin.ModelAdmin):
         CommodityPictureModelInline,
     ]
 
+    list_editable = ['is_putaway']
+
 
 @admin.register(BannerModel)
 class BannerModelAdmin(admin.ModelAdmin):

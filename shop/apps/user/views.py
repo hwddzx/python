@@ -1,7 +1,7 @@
 import random
 import uuid
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -9,7 +9,7 @@ import re
 from django_redis import get_redis_connection
 
 from user import set_password
-from user.forms import UsersForm, LoginForm, InforForm, PasswordForm
+from user.forms import UsersForm, LoginForm, InforForm, PasswordForm, AddressForm
 from user.helps import check_login, send_sms
 from user.models import User, UserAddress
 
@@ -369,4 +369,30 @@ class AddressView(View):
         return render(request, 'user/address.html')
 
     def post(self, request):
-        pass
+        # 接收参数
+        data = request.POST
+        form = AddressForm(data)
+        # 判断参数合法性
+        if form.is_valid():
+            # 合法
+            # 获取用户id
+            user_id = request.session.get('ID')
+            # 获取清洗后的数据
+            cleaned_data = form.cleaned_data
+            # 保存到数据库
+            user = User.objects.get(pk=user_id)
+            UserAddress.objects.create(user=user,
+                                       province=cleaned_data.get('hcity'),
+                                       city=cleaned_data.get('hproper'),
+                                       area=cleaned_data.get('harea'),
+                                       brief=cleaned_data.get('brief'),
+                                       phone=cleaned_data.get('phone'),
+                                       username=cleaned_data.get('username'),
+                                       is_default=cleaned_data.get('is_default')
+                                       )
+            return redirect('order:确认订单')
+        else:
+            # 不合法
+            # 返回错误提示
+            errors = form.errors
+            return render(request, 'user/address.html', context=errors)

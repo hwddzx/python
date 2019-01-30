@@ -20,7 +20,9 @@
     <div style="height: 49px;"></div>
     <ul class="address-list">
         {% for address in address %}
-            <li class="curr">
+            <li {% if address.is_default %}
+                class="curr"
+            {% endif %}>
                 <p>收货人：{{ address.username }}&nbsp;&nbsp;{{ address.phone }}</p>
                 <p class="order-add1">
                     收货地址：{{ address.province }}{{ address.city }}{{ address.area }}{{ address.brief }}
@@ -28,7 +30,9 @@
                 <hr/>
                 <div class="address-cz">
                     <label class="am-radio am-warning">
-                        <input type="radio" name="radio3" value="" data-am-ucheck checked> 设为默认
+                        <input type="radio" name="radio3" value="" data-am-ucheck {% if address.is_default %}
+                               checked
+                        {% endif %}> 设为默认
                     </label>
                     <a href=""><img src="{% static 'images/bj.png' %}" width="18"/>&nbsp;编辑</a>
                     <a href="">删除</a>

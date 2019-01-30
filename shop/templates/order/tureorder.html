@@ -7,7 +7,7 @@
     <body>
     <header data-am-widget="header" class="am-header am-header-default sq-head ">
         <div class="am-header-left am-header-nav">
-            <a href="javascript:history.back()" class="">
+            <a href="{% url 'shopping_cart:购物车' %}" class="">
                 <i class="am-icon-chevron-left"></i>
             </a>
         </div>
@@ -16,17 +16,33 @@
         </h1>
     </header>
     <div style="height: 49px;"></div>
-    <div class="add-address">
-        <a href="{% url 'user:添加收货地址' %}">+新建收货地址</a>
-        <i class="am-icon-angle-right"></i>
-    </div>
+    <h5 class="order-tit">收货人信息</h5>
+    {% if address is None %}
+        <div class="add-address">
+            <a href="{% url 'user:添加收货地址' %}">+新建收货地址</a>
+            <i class="am-icon-angle-right"></i>
+        </div>
+    {% else %}
+        <div class="order-name">
+            <a href="{% url 'user:收货地址' %}">
+                <p class="order-tele">{{ address.username }}&nbsp;&nbsp;&nbsp;{{ address.phone }}</p>
+                <p class="order-add">
+                    {{ address.province }}
+                    {{ address.city }}
+                    {{ address.area }}
+                    {{ address.brief }}
+                </p>
+                <i class="am-icon-angle-right"></i>
+            </a>
+        </div>
+    {% endif %}
     <div style="background: #eee; height: 10px;"></div>
     <ul class="shopcart-list" style="padding-bottom: 0;">
         {% for sku in skus %}
             <li>
                 <img src="{{ MEDIA_URL }}{{ sku.logo }}" class="shop-pic"/>
                 <div class="order-mid">
-                    <div class="tit">{{ sku.name }}</div>
+                    <div class="tit">{{ sku.spu_id.name }} {{ sku.name }}</div>
                     <div class="order-price">{{ sku.price }}<i>{{ sku.count }}</i></div>
                 </div>
             </li>
@@ -35,17 +51,17 @@
     <ul class="order-infor">
         <li class="order-infor-first">
             <span>商品总计：</span>
-            <i>￥88.00</i>
+            <i>￥<span id="goods_price">{{ total_price }}</span></i>
         </li>
         <li class="order-infor-first">
-            <span>运费：</span>
-            <i>包邮</i>
-        </li>
-        <li class="order-infor-first">
-            <a href="">积分抵费></a>
-        </li>
-        <li class="order-infor-first">
-            <a href="">选择优惠券></a>
+            <span>运输方式：</span>
+            <i><select name="transport" id="transport">
+                {% for transport in transports %}
+                    <option value="{{ transport.pk }}" price="{{ transport.price }}">
+                        {{ transport.name }} ¥:{{ transport.price }}
+                    </option>
+                {% endfor %}
+            </select></i>
         </li>
     </ul>
     <div style="background: #eee; height: 10px;"></div>
@@ -54,7 +70,7 @@
     <div style="height: 55px;"></div>
     <div class="shop-fix">
         <div class="order-text">
-            应付总额：<span>￥188</span>
+            应付总额：<span>￥<i id="total_price">0.00</i></span>
         </div>
         <a href="{% url 'order:提交订单' %}" class="js-btn">提交订单</a>
     </div>
@@ -99,4 +115,25 @@
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/amazeui.min.js' %}"></script>
     </body>
+    <script>
+        $(function () {
+            function totalPrice() {
+                //获取商品总价格
+                var goods_price = $('#goods_price').text();
+                //获取快递费
+                var transport_price = $('#transport').find(':selected').attr('price');
+                //订单总金额
+                var total_price = Number(goods_price) + Number(transport_price);
+                {#console.debug(total_price)#}
+                $("#total_price").text(total_price.toFixed(2));
+            }
+
+            //调用
+            totalPrice();
+
+            $('#transport').on('change', function () {
+                totalPrice();
+            })
+        })
+    </script>
 {% endblock %}
