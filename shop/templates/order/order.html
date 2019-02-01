@@ -18,30 +18,19 @@
     <div style="height: 49px;"></div>
     <h5 class="order-tit">收货人信息</h5>
     <div class="order-name">
-        <p class="order-tele">{{ address.username }}&nbsp;&nbsp;&nbsp;{{ address.phone }}</p>
-        <p class="order-add">{{ address.province }}{{ address.city }}{{ address.area }}{{ address.brief }}</p>
+        <p class="order-tele">{{ order.username }}&nbsp;&nbsp;&nbsp;{{ order.phone }}</p>
+        <p class="order-add">{{ order.address }}</p>
     </div>
     <div style="background: #eee; height: 10px;"></div>
     <h5 class="order-tit">确认订单信息</h5>
-    <ul class="shopcart-list" style="padding-bottom: 0; margin-top: 0;">
-        {% for sku in skus %}
-            <li>
-                <img src="{{ MEDIA_URL }}{{ sku.logo }}" class="shop-pic"/>
-                <div class="order-mid">
-                    <div class="tit">{{ sku.name }}</div>
-                    <div class="order-price">￥{{ sku.price }} <i>X{{ sku.count }}</i></div>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
     <ul class="order-infor">
         <li class="order-infor-first">
             <span>商品总计：</span>
-            <i>￥88.00</i>
+            <i>￥{{ order.total_price }}</i>
         </li>
         <li class="order-infor-first">
             <span>运费：</span>
-            <i>包邮</i>
+            <i>{{ order.transport }}：￥{{ order.transport_price }}</i>
         </li>
         <li class="order-infor-first">
             <a href="{% url 'user:积分' %}">积分抵费></a>
@@ -89,7 +78,7 @@
     <div style="height: 55px;"></div>
     <div class="shop-fix">
         <div class="order-text">
-            应付总额：<span>￥188</span>
+            应付总额：<span>￥{{ order.order_price }}</span>
         </div>
         <a href="{% url 'order:完成支付' %}" class="js-btn">立即支付</a>
     </div>

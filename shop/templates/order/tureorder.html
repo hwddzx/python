@@ -16,64 +16,69 @@
         </h1>
     </header>
     <div style="height: 49px;"></div>
-    <h5 class="order-tit">收货人信息</h5>
-    {% if address is None %}
-        <div class="add-address">
-            <a href="{% url 'user:添加收货地址' %}">+新建收货地址</a>
-            <i class="am-icon-angle-right"></i>
-        </div>
-    {% else %}
-        <div class="order-name">
-            <a href="{% url 'user:收货地址' %}">
-                <p class="order-tele">{{ address.username }}&nbsp;&nbsp;&nbsp;{{ address.phone }}</p>
-                <p class="order-add">
-                    {{ address.province }}
-                    {{ address.city }}
-                    {{ address.area }}
-                    {{ address.brief }}
-                </p>
+    <form method="post" action="">
+        {% csrf_token %}
+        {% if address is None %}
+            <div class="add-address">
+                <a href="{% url 'user:添加收货地址' %}">+新建收货地址</a>
                 <i class="am-icon-angle-right"></i>
-            </a>
-        </div>
-    {% endif %}
-    <div style="background: #eee; height: 10px;"></div>
-    <ul class="shopcart-list" style="padding-bottom: 0;">
-        {% for sku in skus %}
-            <li>
-                <img src="{{ MEDIA_URL }}{{ sku.logo }}" class="shop-pic"/>
-                <div class="order-mid">
-                    <div class="tit">{{ sku.spu_id.name }} {{ sku.name }}</div>
-                    <div class="order-price">{{ sku.price }}<i>{{ sku.count }}</i></div>
-                </div>
+            </div>
+        {% else %}
+            <h5 class="order-tit">收货人信息</h5>
+            <div class="order-name">
+                <a href="{% url 'user:收货地址' %}">
+                    <p class="order-tele">{{ address.username }}&nbsp;&nbsp;&nbsp;{{ address.phone }}</p>
+                    <p class="order-add">
+                        {{ address.province }}
+                        {{ address.city }}
+                        {{ address.area }}
+                        {{ address.brief }}
+                    </p>
+                    <i class="am-icon-angle-right"></i>
+                </a>
+            </div>
+            <input type="hidden" name="address" value="{{ address.pk }}">
+        {% endif %}
+        <div style="background: #eee; height: 10px;"></div>
+        <ul class="shopcart-list" style="padding-bottom: 0;">
+            {% for sku in skus %}
+                <li>
+                    <img src="{{ MEDIA_URL }}{{ sku.logo }}" class="shop-pic"/>
+                    <div class="order-mid">
+                        <div class="tit">{{ sku.spu_id.name }} {{ sku.name }}</div>
+                        <div class="order-price">{{ sku.price }}<i>{{ sku.count }}</i></div>
+                    </div>
+                    <input type="hidden" name="sku_ids" value="{{ sku.pk }}">
+                </li>
+            {% endfor %}
+        </ul>
+        <ul class="order-infor">
+            <li class="order-infor-first">
+                <span>商品总计：</span>
+                <i>￥<span id="goods_price">{{ total_price }}</span></i>
             </li>
-        {% endfor %}
-    </ul>
-    <ul class="order-infor">
-        <li class="order-infor-first">
-            <span>商品总计：</span>
-            <i>￥<span id="goods_price">{{ total_price }}</span></i>
-        </li>
-        <li class="order-infor-first">
-            <span>运输方式：</span>
-            <i><select name="transport" id="transport">
-                {% for transport in transports %}
-                    <option value="{{ transport.pk }}" price="{{ transport.price }}">
-                        {{ transport.name }} ¥:{{ transport.price }}
-                    </option>
-                {% endfor %}
-            </select></i>
-        </li>
-    </ul>
-    <div style="background: #eee; height: 10px;"></div>
-    <textarea placeholder="备注说明" class="bz-infor"></textarea>
-    <div style="background: #eee; height: 10px;"></div>
-    <div style="height: 55px;"></div>
-    <div class="shop-fix">
-        <div class="order-text">
-            应付总额：<span>￥<i id="total_price">0.00</i></span>
+            <li class="order-infor-first">
+                <span>运输方式：</span>
+                <i><select name="transport" id="transport">
+                    {% for transport in transports %}
+                        <option value="{{ transport.pk }}" price="{{ transport.price }}">
+                            {{ transport.name }} ¥:{{ transport.price }}
+                        </option>
+                    {% endfor %}
+                </select></i>
+            </li>
+        </ul>
+        <div style="background: #eee; height: 10px;"></div>
+        <textarea placeholder="备注说明" class="bz-infor"></textarea>
+        <div style="background: #eee; height: 10px;"></div>
+        <div style="height: 55px;"></div>
+        <div class="shop-fix">
+            <div class="order-text">
+                应付总额：<span>￥<i id="total_price">0.00</i></span>
+            </div>
+            <a href="javascript:;" class="js-btn">提交订单</a>
         </div>
-        <a href="javascript:;" class="js-btn">提交订单</a>
-    </div>
+    </form>
     <!--底部-->
     <div style="height: 55px;"></div>
     <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default sq-foot am-no-layout" id="">
@@ -136,8 +141,24 @@
             })
 
             //绑定点击事件,提交订单数据
-            $(".js-btn").on('click',function () {
-                console.debug('11')
+            $(".js-btn").on('click', function () {
+                //准备数据
+                var data = $('form').serialize();
+                //发送ajax
+                $.ajax({
+                    type: "post",
+                    url: "{% url 'order:确认订单' %}",
+                    data: data,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == 0) {
+                            //跳转到确认支付页面
+                            location.href = "{% url 'order:提交订单' %}?order_sn=" + data.data;
+                        } else {
+                            alert(data.errmsg);
+                        }
+                    }
+                })
             })
         })
     </script>
