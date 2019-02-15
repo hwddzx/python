@@ -57,6 +57,7 @@ class Payment(models.Model):
     name = models.CharField(max_length=50, verbose_name='支付方式')
     bridf = models.CharField(max_length=200, verbose_name='说明')
     logo = models.ImageField(upload_to='payment/%Y', verbose_name='支付logo')
+    is_tj = models.BooleanField(default=False, verbose_name='是否推荐')
     addtime = models.DateTimeField(verbose_name='添加时间', auto_now_add=True)
     updatetime = models.DateTimeField(verbose_name='修改时间', auto_now=True)
     is_delete = models.BooleanField(verbose_name='是否删除', default=False)

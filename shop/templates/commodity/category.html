@@ -55,7 +55,8 @@
                                 src="{{ MEDIA_URL }}{{ sku.logo }}"
                                 class="list-pic"/></a>
                         <div class="shop-list-mid" style="width: 65%;">
-                            <div class="tit"><a href="{% url 'commodity:商品详情' sku.pk %}">{{ sku.spu_id.name }}{{ sku.name }}</a></div>
+                            <div class="tit"><a href="{% url 'commodity:商品详情' sku.pk %}">
+                                {{ sku.spu_id.name }}{{ sku.name }}</a></div>
                             <div class="am-gallery-desc">{{ sku.price }}</div>
                             <p>销量：{{ sku.sellnum }}{{ sku.unit }}</p>
                         </div>
@@ -80,14 +81,9 @@
         <a href="{% url 'shopping_cart:购物车' %}">
             <div class="fix-bot-cart"><i id="cart_count">{{ cart_count }}</i></div>
         </a>
-        <a href="{% url 'order:确认订单' %}" class="list-js">去结算</a>
+        <a href="{% url 'shopping_cart:购物车' %}" class="list-js">去结算</a>
         <a href="{% url 'shopping_cart:购物车' %}" class="list-jsk">购物车</a>
-        <!--<div class="js-text">
-           <p><b>￥217.80</b></p>
-           <p class="js-car">购物满50元免运费</p>
-     </div>-->
     </div>
-
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/amazeui.min.js' %}"></script>

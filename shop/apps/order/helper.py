@@ -1,3 +1,7 @@
+import os
+
+from alipay import AliPay
+from django.conf import settings
 from django_redis import get_redis_connection
 
 from commodity.models import CommoditySkuModel
@@ -19,3 +23,22 @@ def get_user_sku(request):
         sku.count = data[key]
         skus.append(sku)
     return skus
+
+
+def get_alipay():
+    # 构造支付请求
+    app_private_key_string = open(os.path.join(settings.BASE_DIR, "utils/alipay/user_private_key.txt")).read()
+    alipay_public_key_string = open(os.path.join(settings.BASE_DIR, 'utils/alipay/alipay_public_key.txt')).read()
+
+    # 初始化对象
+    alipay = AliPay(
+        appid="2016092400582435",
+        app_notify_url=None,  # 默认回调url
+        app_private_key_string=app_private_key_string,
+        # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
+        alipay_public_key_string=alipay_public_key_string,
+        sign_type="RSA2",  # RSA 或者 RSA2
+        debug=True  # 默认False
+    )
+
+    return alipay
