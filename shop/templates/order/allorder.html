@@ -24,101 +24,27 @@
         <li><a href="{% url 'order:全部订单' %}">待评价</a></li>
 
     </ul>
-    <!--代付款-->
-    <div class="c-comment">
-        <span class="c-comment-num">支付宝支付</span>
-        <span class="c-comment-suc">待付款</span>
-    </div>
 
-    <div class="c-comment-list" style="border: 0;">
-        <a href="{% url 'order:订单详情' %}">
-            <p>应付金额：￥63.0 实付金额：<span>￥63.0</span></p>
-            <p>订单编号：123456789</p>
-            <p>下单时间：2016-01-07 10：22：52</p>
-            <p>联系店长：沫沫 <span><i class="iconfont">&#xe603</i>18012345678</span></p>
-        </a>
-    </div>
-    <div class="c-com-btn">
-        <a href="{% url 'order:确认订单' %}" class="oncepay">立即支付</a>
-        <a href="" class="canelpay">取消订单</a>
-    </div>
-    <div class="clear"></div>
-    <!--代付款-->
-    <!--待收货-->
-    <div class="c-comment">
-        <span class="c-comment-num">微信支付</span>
-        <span class="c-comment-suc">待收货</span>
-    </div>
+    {% for order in orders %}
+        <div class="c-comment">
+            <span class="c-comment-num">支付宝支付</span>
+            <span class="c-comment-suc">{{ order.order_status }}</span>
+        </div>
 
-    <div class="c-comment-list" style="border: 0;">
-        <a href="{% url 'order:订单详情' %}">
-            <p>应付金额：￥63.0 实付金额：<span>￥63.0</span> <b>省</b><span>￥2.5</span></p>
-            <p>订单编号：123456789</p>
-            <p>下单时间：2016-01-07 10：22：52</p>
-            <p>联系店长：沫沫 <span><i class="iconfont">&#xe603</i>18012345678</span></p>
-        </a>
-    </div>
-    <div class="c-com-btn">
-        <a href="" class="oncepay">确认收货</a>
-        <a href="" class="canelpay">取消订单</a>
-    </div>
-    <div class="clear"></div>
-    <!--待收货-->
-    <!--交易成功-->
-    <div class="c-comment">
-        <span class="c-comment-num">余额支付</span>
-        <span class="c-comment-suc">已完成</span>
-    </div>
-
-    <div class="c-comment-list" style="border: 0;">
-        <a href="{% url 'order:订单详情' %}">
-            <p>应付金额：￥63.0 实付金额：<span>￥63.0</span> <b>省</b><span>￥2.5</span></p>
-            <p>订单编号：123456789</p>
-            <p>下单时间：2016-01-07 10：22：52</p>
-            <p>联系店长：沫沫 <span><i class="iconfont">&#xe603</i>18012345678</span></p>
-        </a>
-    </div>
-    <div class="c-com-btn">
-        <a href="" class="oncepay">删除订单</a>
-        <a href="" class="canelpay">投诉</a>
-    </div>
-    <div class="clear"></div>
-    <!--交易成功-->
-    <!--交易成功-->
-    <div class="c-comment">
-        <span class="c-comment-num">余额支付</span>
-        <span class="c-comment-suc">待发货</span>
-    </div>
-
-    <div class="c-comment-list" style="border: 0;">
-        <a href="{% url 'order:订单详情' %}">
-            <p>应付金额：￥63.0 实付金额：<span>￥63.0</span> <b>省</b><span>￥2.5</span></p>
-            <p>订单编号：123456789</p>
-            <p>下单时间：2016-01-07 10：22：52</p>
-            <p>联系店长：沫沫 <span><i class="iconfont">&#xe603</i>18012345678</span></p>
-        </a>
-    </div>
-    <div class="c-com-btn">
-        <a href="" class="canelpay">取消订单</a>
-    </div>
-    <div class="clear"></div>
-    <!--交易成功-->
-    <div class="c-comment">
-        <span class="c-comment-num">余额支付</span>
-        <span class="c-comment-suc"> 待评价</span>
-    </div>
-
-    <div class="c-comment-list" style="border: 0;">
-        <a href="{% url 'order:订单详情' %}">
-            <p>应付金额：￥63.0 实付金额：<span>￥63.0</span> <b>省</b><span>￥2.5</span></p>
-            <p>订单编号：123456789</p>
-            <p>下单时间：2016-01-07 10：22：52</p>
-            <p>联系店长：沫沫 <span><i class="iconfont">&#xe603</i>18012345678</span></p>
-        </a>
-    </div>
-    <div class="c-com-btn">
-        <a href="" class="oncepay">立即评价</a>
-    </div>
+        <div class="c-comment-list" style="border: 0;">
+            <a href="{% url 'order:订单详情' %}">
+                <p>应付金额：￥{{ order.order_price }} 实付金额：<span>￥63.0</span></p>
+                <p>订单编号：{{ order.order_sn }}</p>
+                <p>下单时间：{{ order.addtime }}</p>
+                <p>联系店长：沫沫 <span><i class="iconfont">&#xe603</i>18012345678</span></p>
+            </a>
+        </div>
+        <div class="c-com-btn">
+            <a href="{% url 'order:确认订单' %}" class="oncepay">立即支付</a>
+            <a href="" class="canelpay">取消订单</a>
+        </div>
+        <div class="clear"></div>
+    {% endfor %}
 
     <!--底部-->
     <div style="height: 55px;"></div>

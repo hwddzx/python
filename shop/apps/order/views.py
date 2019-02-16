@@ -1,10 +1,8 @@
-import os
 from datetime import datetime
 import random
 from time import sleep
 
-from alipay import AliPay
-from django.conf import settings
+from django.db import transaction
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
@@ -21,7 +19,12 @@ from user.models import UserAddress, User
 
 @check_login  # 全部订单
 def allorder(request):
-    return render(request, 'order/allorder.html')
+    user_id = request.session.get('ID')
+    orders = Order.objects.filter(user_id=user_id, is_delete=False)
+    context = {
+        'orders': orders
+    }
+    return render(request, 'order/allorder.html', context=context)
 
 
 class Tureorder(View):
@@ -70,6 +73,7 @@ class Tureorder(View):
         }
         return render(request, 'order/tureorder.html', context=context)
 
+    @transaction.atomic
     @method_decorator(check_login)
     def post(self, request):
         """
@@ -104,6 +108,8 @@ class Tureorder(View):
             return JsonResponse(json_msg(4, '运输方式不存在!'))
 
         # 2. 操作数据
+        # 创建保存点
+        sid = transaction.savepoint()
         # 操作订单基本信息表
         order_sn = "{}{}{}".format(datetime.now().strftime("%Y%m%d%H%M%S"), user_id, random.randrange(10000, 99999))
         address_info = "{}{}{}-{}".format(address.province, address.city, address.area, address.brief)
@@ -126,17 +132,24 @@ class Tureorder(View):
         for sku_id in sku_ids:
             # 获取商品对象
             try:
-                goods_sku = CommoditySkuModel.objects.get(pk=sku_id, is_delete=False, is_putaway=True)
+                goods_sku = CommoditySkuModel.objects.select_for_update().get(pk=sku_id, is_delete=False,
+                                                                              is_putaway=True)
             except CommoditySkuModel.DoesNotExist:
+                # 回滚数据
+                transaction.savepoint_rollback(sid)
                 return JsonResponse(json_msg(5, '商品不存在'))
             # 获取购物车中商品的数量
             try:
                 count = r.hget(cart_key, sku_id)
                 count = int(count)
             except:
+                # 回滚数据
+                transaction.savepoint_rollback(sid)
                 return JsonResponse(json_msg(6, '购物车中数量不存在'))
             # 判断库存是否充足
             if goods_sku.num < count:
+                # 回滚数据
+                transaction.savepoint_rollback(sid)
                 return JsonResponse(json_msg(7, '库存不足!'))
             # 保存订单商品表
             order_goods = OrderGoods.objects.create(
@@ -153,12 +166,19 @@ class Tureorder(View):
             goods_sku.save()
 
         # 反过头来操作订单基本信息表 商品总金额和订单总金额
-        order_price = goods_total_price + transport.price
-        order.total_price = goods_total_price
-        order.order_price = order_price
-        order.save()
+        try:
+            order_price = goods_total_price + transport.price
+            order.total_price = goods_total_price
+            order.order_price = order_price
+            order.save()
+        except:
+            # 回滚数据
+            transaction.savepoint_rollback(sid)
+            return JsonResponse(json_msg(9, '更新订单失败'))
         # 清空reds中的购物车数据(对应sku_id)
         r.hdel(cart_key, *sku_ids)
+        # 下单成功,提交事务
+        transaction.savepoint_commit(sid)
         # 3. 合成响应
         return JsonResponse(json_msg(0, '创建订单成功', data=order_sn))
 
