@@ -111,10 +111,11 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
 # 设置静态文件根目录  上线的时候使用一次
 # STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
@@ -138,7 +139,7 @@ ACCESS_KEY_ID = "LTAI2qSiJdWP87em"
 ACCESS_KEY_SECRET = "FzORQ587PgGBoOAdmxzCjaxQi8klUi"
 
 # 分配一个资源URL
-# MEDIA_URL = "/static/media/"
+MEDIA_URL = "/static/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 
 # 设置ckeditor的上传目录
@@ -165,6 +166,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # 每页显示条数
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 50
 
+"""
 # 七牛云密钥等配置
 QINIU_ACCESS_KEY = 'eCWAJaH6vmFJYN3OHgVOnuwXFabov0XlkEiNbkuc'
 QINIU_SECRET_KEY = 'mOCiBdX_zRQ1FGBq8_rAxhdTJzsDw6nP4Ld0052X'
@@ -182,3 +184,4 @@ DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
 STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
 # 静态文件的存储引擎
 STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'  # 七牛云配置结束
+"""
