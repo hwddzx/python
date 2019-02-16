@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = '=83#wm^k52rg234hrr#+ui9zw(gol+(zc3xsru(g222+qi63bn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True  # 上线改为False
 
 ALLOWED_HOSTS = []
 
@@ -111,7 +111,7 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
@@ -138,7 +138,7 @@ ACCESS_KEY_ID = "LTAI2qSiJdWP87em"
 ACCESS_KEY_SECRET = "FzORQ587PgGBoOAdmxzCjaxQi8klUi"
 
 # 分配一个资源URL
-MEDIA_URL = "/static/media/"
+# MEDIA_URL = "/static/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 
 # 设置ckeditor的上传目录
@@ -162,5 +162,23 @@ HAYSTACK_CONNECTIONS = {
 }
 # 当添加、修改、删除数据时，自动生成索引
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+# 每页显示条数
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 50
 
+# 七牛云密钥等配置
+QINIU_ACCESS_KEY = 'eCWAJaH6vmFJYN3OHgVOnuwXFabov0XlkEiNbkuc'
+QINIU_SECRET_KEY = 'mOCiBdX_zRQ1FGBq8_rAxhdTJzsDw6nP4Ld0052X'
+QINIU_BUCKET_NAME = 'image-shop'
+QINIU_BUCKET_DOMAIN = 'pmzxu7b75.bkt.clouddn.com'
+QINIU_SECURE_URL = False  # 使用http
+PREFIX_URL = 'http://'
 
+# 上传文件地址配置
+MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + "/"
+# 上传文件的存储引擎配置
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
+
+# 静态文件的url配置
+STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
+# 静态文件的存储引擎
+STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'  # 七牛云配置结束
